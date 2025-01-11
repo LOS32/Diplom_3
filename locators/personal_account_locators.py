@@ -8,6 +8,7 @@ class PersonalAccountLocators:
     ACCOUNT_BUTTON = (By.XPATH, "//p[text()='Личный Кабинет']")
     ORDER_HISTORY_BUTTON = (By.XPATH, "//a[@href='/account/order-history']")
     ORDER_HISTORY_ITEM = (By.XPATH, "//div[contains(@class, 'OrderHistory_textBox__3lgbs')]")
+    LOGOUT_BUTTON = (By.XPATH, "//button[text()='Выход']")
 
 # Локаторы для страницы восстановления пароля
 class PasswordRecoveryLocators:

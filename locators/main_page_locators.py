@@ -10,3 +10,4 @@ class MainPageLocators:
     LOGO_BUTTON = (By.XPATH, "//a[@href='/']")
     # Секция "Булки" в конструкторе
     BUNS_SECTION = (By.XPATH, "//span[text()='Булки']")
+    LOGIN_BUTTON_MAIN_FORM = (By.XPATH, "//button[contains(@class, 'button_button_type_primary__1O7Bx') and text()='Войти']")

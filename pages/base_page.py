@@ -1,6 +1,8 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.common.exceptions import ElementClickInterceptedException
+import time
 
 class BasePage:
     def __init__(self, driver):
@@ -17,8 +19,13 @@ class BasePage:
         return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     def click_to_element(self, locator):
-        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(locator))
-        self.driver.find_element(*locator).click()
+        try:
+            WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(locator))
+            self.driver.find_element(*locator).click()
+        except ElementClickInterceptedException:
+            # Если клик перехвачен, ждем и повторяем попытку
+            time.sleep(1)
+            self.driver.find_element(*locator).click()
 
     def add_text_to_element(self, locator, text):
         self.find_element_with_wait(locator).send_keys(text)

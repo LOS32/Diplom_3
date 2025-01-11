@@ -13,3 +13,6 @@ class MainPage(BasePage):
     def click_login_button(self):
         self.click_to_element(MainPageLocators.LOGIN_BUTTON)
 
+    def is_login_button_visible(self):
+        return self.find_element_with_wait(MainPageLocators.LOGIN_BUTTON_MAIN_FORM).is_displayed()
+
