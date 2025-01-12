@@ -17,7 +17,6 @@ class PersonalAccountPage(BasePage):
     def enter_email(self, email):
         self.add_text_to_element(PersonalAccountLocators.LOGIN_NAME_FIELD, email)
 
-    # Ввод пароля
     def enter_password(self, password):
         self.add_text_to_element(PersonalAccountLocators.PASSWORD_NAME_FIELD, password)
 

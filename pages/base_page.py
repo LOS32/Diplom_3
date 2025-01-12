@@ -23,7 +23,6 @@ class BasePage:
             WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(locator))
             self.driver.find_element(*locator).click()
         except ElementClickInterceptedException:
-            # Если клик перехвачен, ждем и повторяем попытку
             time.sleep(1)
             self.driver.find_element(*locator).click()
 
@@ -50,5 +49,17 @@ class BasePage:
         WebDriverWait(self.driver, timeout).until(EC.url_contains(url_substring))
 
     def drag_and_drop_element(self, source_element, target_element):
-        action = ActionChains(self.driver)
-        action.drag_and_drop(source_element, target_element).perform()
+        browser_name = self.driver.capabilities['browserName']
+        if browser_name == "chrome":
+            action = ActionChains(self.driver)
+            action.drag_and_drop(source_element, target_element).perform()
+        elif browser_name == "firefox":
+            self.driver.execute_script(
+                """
+                const dataTransfer = new DataTransfer();
+                arguments[0].dispatchEvent(new DragEvent('dragstart', { bubbles: true, cancelable: true, dataTransfer }));
+                arguments[1].dispatchEvent(new DragEvent('drop', { bubbles: true, cancelable: true, dataTransfer }));
+                """,
+                source_element,
+                target_element,
+            )

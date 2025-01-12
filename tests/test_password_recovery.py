@@ -15,6 +15,6 @@ class TestPasswordRecovery:
         password_recovery_page.enter_email(TEST_EMAIL)
         password_recovery_page.click_restore_button()
         password_recovery_page.click_show_password_button()
-        assert password_recovery_page.is_password_visible(), "Поле Пароль не изменило тип на 'text'!"
+        assert password_recovery_page.is_password_visible()
 
 

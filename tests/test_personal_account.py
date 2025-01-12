@@ -1,4 +1,5 @@
 import allure
+
 from pages.main_page import MainPage
 from pages.personal_account_page import PersonalAccountPage
 from pages.constructor_page import ConstructorPage
@@ -16,11 +17,11 @@ class TestPersonalAccount:
         personal_account_page.enter_password(USER_PASSWORD)
         personal_account_page.click_login_button()
         constructor_page = ConstructorPage(driver)
-        constructor_page.drag_and_drop_bun()
+        main_page.drag_and_drop_element()
         constructor_page.click_order_button()
         constructor_page.close_order_modal()
         personal_account_page.go_to_personal_account()
         personal_account_page.go_to_order_history()
-        assert personal_account_page.is_order_present_in_history(), "Заказ не найден в истории заказов!"
+        assert personal_account_page.is_order_present_in_history()
 
 
