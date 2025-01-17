@@ -82,3 +82,29 @@ class TestOrderFeed:
         order_feed_element = personal_account_page.find_element_with_wait(order_feed_number_locator)
         order_feed_number = order_feed_element.text.strip()
         assert order_feed_number == order_number
+
+    @allure.story("После оформления заказа его номер появляется в разделе В работе")
+    def test_order_in_progress(self, driver):
+        main_page = MainPage(driver)
+        main_page.open_main_page()
+        main_page.click_to_element(MainPageLocators.ACCOUNT_BUTTON)
+        personal_account_page = PersonalAccountPage(driver)
+        personal_account_page.enter_email(USER_EMAIL)
+        personal_account_page.enter_password(USER_PASSWORD)
+        personal_account_page.click_login_button()
+
+        constructor_page = ConstructorPage(driver)
+        bun = main_page.find_element_with_wait(MainPageLocators.BUNS_TAB)
+        basket = main_page.find_element_with_wait(MainPageLocators.BASKET)
+        constructor_page.drag_and_drop_element(bun, basket)
+        time.sleep(2)
+        constructor_page.click_order_button()
+        time.sleep(2)
+        constructor_page.click_to_element(ConstructorLocators.CLOSE_ORDER_MODAL_BUTTON)
+        time.sleep(2)
+
+        main_page.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
+
+        # Проверяем, что отображается раздел "В работе"
+        in_progress_element = main_page.find_element_with_wait(ConstructorLocators.IN_PROGRESS)
+        assert in_progress_element.is_displayed(), "Раздел 'В работе' не отображается!"

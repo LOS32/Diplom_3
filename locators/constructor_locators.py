@@ -12,3 +12,4 @@ class ConstructorLocators:
     ORDER_HISTORY_LOCATOR = (By.XPATH, "//a[contains(@class, 'Account_link__2ETsJ') and text()='История заказов']")
     HISTORY_ORDER_NUMBER_LOCATOR_TEMPLATE = "//p[contains(@class, 'text_type_digits-default') and text()='#{order_number}']"
     SPECIFIC_ORDER_LOCATOR = (By.XPATH, "//p[contains(@class, 'OrderFeed_number__2MbrQ') and contains(@class, 'text_type_digits-large')]")
+    IN_PROGRESS = (By.XPATH, "//li[contains(@class, 'text_type_main-small') and text()='Все текущие заказы готовы!']")
