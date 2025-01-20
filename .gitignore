@@ -5,3 +5,6 @@ allure-report/
 __pycache__/
 *.pyc
 *.pyo
+.idea/
+.vscode/
+venv/
