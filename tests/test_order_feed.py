@@ -5,8 +5,6 @@ from locators.main_page_locators import MainPageLocators
 from config import USER_EMAIL, USER_PASSWORD
 from pages.personal_account_page import PersonalAccountPage
 from pages.constructor_page import ConstructorPage
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 @allure.feature("Лента заказов")
 class TestOrderFeed:
@@ -14,12 +12,9 @@ class TestOrderFeed:
     def test_order_details_modal(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
-        WebDriverWait(driver, 8).until(EC.element_to_be_clickable(MainPageLocators.ORDER_FEED_BUTTON))
         main_page.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
-        WebDriverWait(driver, 8).until(EC.visibility_of_element_located(ConstructorLocators.ORDER_LOCATOR))
         order = main_page.find_element_with_wait(ConstructorLocators.ORDER_LOCATOR)
         order.click()
-        WebDriverWait(driver, 8).until(EC.visibility_of_element_located(ConstructorLocators.COMPOSITION_LOCATOR))
         assert main_page.find_element_with_wait(ConstructorLocators.COMPOSITION_LOCATOR).is_displayed()
 
     @allure.title("Заказы из Истории заказов отображаются в Ленте заказов")
@@ -79,9 +74,7 @@ class TestOrderFeed:
         bun = main_page.find_element_with_wait(MainPageLocators.BUNS_TAB)
         basket = main_page.find_element_with_wait(MainPageLocators.BASKET)
         constructor_page.drag_and_drop_element(bun, basket)
-        WebDriverWait(driver, 8).until(EC.element_to_be_clickable(ConstructorLocators.ORDER_BUTTON))
         constructor_page.click_order_button()
-        WebDriverWait(driver, 8).until(EC.element_to_be_clickable(ConstructorLocators.CLOSE_ORDER_MODAL_BUTTON))
         constructor_page.close_order_modal()
         main_page.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
         in_progress_element = main_page.find_element_with_wait(ConstructorLocators.IN_PROGRESS)
