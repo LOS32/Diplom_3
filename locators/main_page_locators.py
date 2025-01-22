@@ -20,3 +20,4 @@ class MainPageLocators:
     COUNTER_ZERO = (By.XPATH, "//div[contains(@class, 'counter_counter__ZNLkj')]//p[text()='0']")
     COUNTER_TWO = (By.XPATH, "//p[@class='counter_counter__num__3nue1' and text()='2']")
     BASKET = (By.XPATH, "//span[@class='constructor-element__text' and text()='Перетяните булочку сюда (верх)']")
+

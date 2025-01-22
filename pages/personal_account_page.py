@@ -1,7 +1,5 @@
 from locators.personal_account_locators import PersonalAccountLocators
 from pages.base_page import BasePage
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 class PersonalAccountPage(BasePage):
     def __init__(self, driver):
@@ -26,8 +24,8 @@ class PersonalAccountPage(BasePage):
         self.click_to_element(PersonalAccountLocators.LOGIN_BUTTON_MAIN_FORM)
 
     def go_to_order_history(self):
-        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(PersonalAccountLocators.ORDER_HISTORY_BUTTON))
         self.click_to_element(PersonalAccountLocators.ORDER_HISTORY_BUTTON)
 
     def is_order_present_in_history(self):
         return self.find_element_with_wait(PersonalAccountLocators.ORDER_HISTORY_ITEM).is_displayed()
+

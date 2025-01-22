@@ -1,6 +1,8 @@
 from locators.main_page_locators import MainPageLocators
 from pages.base_page import BasePage
 from config import BASE_URL
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class MainPage(BasePage):
     def __init__(self, driver):
@@ -8,6 +10,7 @@ class MainPage(BasePage):
 
     def open_main_page(self):
         self.open_page(BASE_URL)
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(MainPageLocators.LOGIN_BUTTON))
 
     def click_login_button(self):
         self.click_to_element(MainPageLocators.LOGIN_BUTTON)
