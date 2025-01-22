@@ -22,7 +22,7 @@ class TestOrderFeed:
         WebDriverWait(driver, 8).until(EC.visibility_of_element_located(ConstructorLocators.COMPOSITION_LOCATOR))
         assert main_page.find_element_with_wait(ConstructorLocators.COMPOSITION_LOCATOR).is_displayed()
 
-    @allure.story("Заказы из Истории заказов отображаются в Ленте заказов")
+    @allure.title("Заказы из Истории заказов отображаются в Ленте заказов")
     def test_order_in_feed(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
@@ -45,7 +45,7 @@ class TestOrderFeed:
         order_feed_number = order_feed_element.text.strip()
         assert order_feed_number == order_number
 
-    @allure.story("При создании нового заказа счётчик Выполнено за всё время увеличивается")
+    @allure.title("При создании нового заказа счётчик Выполнено за всё время увеличивается")
     def test_order_counter(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
@@ -60,7 +60,7 @@ class TestOrderFeed:
         constructor_page.drag_and_drop_element(bun, basket)
         constructor_page.click_order_button()
         order_number = constructor_page.get_order_id()
-        constructor_page.click_to_element(ConstructorLocators.CLOSE_ORDER_MODAL_BUTTON)
+        constructor_page.close_order_modal()
         main_page.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
         order_feed_element = personal_account_page.find_element_with_wait(ConstructorLocators.SPECIFIC_ORDER_LOCATOR)
         order_feed_number = order_feed_element.text.strip()
