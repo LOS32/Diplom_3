@@ -13,6 +13,8 @@ class ConstructorPage(BasePage):
     def close_order_modal(self):
         if self.get_text_from_element(ConstructorLocators.ORDER_NUMBER_LOCATOR) == '9999':
             self.wait_change_value_in_element_page(ConstructorLocators.ORDER_NUMBER_LOCATOR, '9999')
-        WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(ConstructorLocators.CLOSE_ORDER_MODAL_BUTTON))
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(ConstructorLocators.CLOSE_ORDER_MODAL_BUTTON))
         self.click_to_element(ConstructorLocators.CLOSE_ORDER_MODAL_BUTTON)
+
+
 

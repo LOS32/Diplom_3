@@ -11,20 +11,22 @@ class BasePage:
     def open_page(self, url):
         self.driver.get(url)
 
-    def find_element_with_wait(self, locator, timeout=15):
+    def find_element_with_wait(self, locator, timeout=10):
         WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
         return self.driver.find_element(*locator)
 
-    def wait_for_element_visible(self, locator, timeout=15):
+    def wait_for_element_visible(self, locator, timeout=10):
         return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     def click_to_element(self, locator):
         try:
-            WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable(locator))
-            self.driver.find_element(*locator).click()
+            WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
+            element = self.driver.find_element(*locator)
+            element.click()
         except ElementClickInterceptedException:
-            WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable(locator))
-            self.driver.find_element(*locator).click()
+            element = self.driver.find_element(*locator)
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+            self.driver.execute_script("arguments[0].click();", element)
 
     def add_text_to_element(self, locator, text):
         self.find_element_with_wait(locator).send_keys(text)
@@ -75,6 +77,8 @@ class BasePage:
         else:
             self.id = self.get_text_from_element(ConstructorLocators.ORDER_NUMBER_LOCATOR)
         return self.id
+
+
 
 
 
