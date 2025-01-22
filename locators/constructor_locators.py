@@ -4,7 +4,7 @@ class ConstructorLocators():
     BUNS_TAB = (By.XPATH, "//span[text()='Булки']/ancestor::div[contains(@class, 'tab_tab__1SPyG')]")
     BASKET = (By.XPATH, "//span[@class='constructor-element__text' and text()='Перетяните булочку сюда (верх)']")
     ORDER_BUTTON = (By.XPATH, "//button[text()='Оформить заказ']")
-    CLOSE_ORDER_MODAL_BUTTON = (By.CLASS_NAME, "Modal_modal__close_modified__3V5XS")
+    CLOSE_ORDER_MODAL_BUTTON = (By.XPATH, "//button[contains(@class, 'Modal_modal__close_modified__3V5XS') and contains(@class, 'Modal_modal__close__TnseK')]")
     ORDER_STATUS_LOCATOR = (By.XPATH, "//p[contains(@class, 'text_type_main-small') and text()='Ваш заказ начали готовить']")
     COMPOSITION_LOCATOR = (By.XPATH, "//p[contains(@class, 'text_type_main-medium') and text()='Cостав']")
     ORDER_LOCATOR = (By.XPATH, "//p[contains(@class, 'text_type_digits-default')]")

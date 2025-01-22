@@ -37,7 +37,7 @@ class TestOrderFeed:
         constructor_page.drag_and_drop_element(bun, basket)
         constructor_page.click_order_button()
         order_number = constructor_page.get_order_id()
-        constructor_page.click_to_element(ConstructorLocators.CLOSE_ORDER_MODAL_BUTTON)
+        constructor_page.close_order_modal()
         main_page.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
         order = main_page.find_element_with_wait(ConstructorLocators.ORDER_LOCATOR)
         order.click()
@@ -82,7 +82,7 @@ class TestOrderFeed:
         WebDriverWait(driver, 8).until(EC.element_to_be_clickable(ConstructorLocators.ORDER_BUTTON))
         constructor_page.click_order_button()
         WebDriverWait(driver, 8).until(EC.element_to_be_clickable(ConstructorLocators.CLOSE_ORDER_MODAL_BUTTON))
-        constructor_page.click_to_element(ConstructorLocators.CLOSE_ORDER_MODAL_BUTTON)
+        constructor_page.close_order_modal()
         main_page.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
         in_progress_element = main_page.find_element_with_wait(ConstructorLocators.IN_PROGRESS)
         assert in_progress_element.is_displayed(), "Раздел 'В работе' не отображается!"
