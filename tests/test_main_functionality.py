@@ -9,7 +9,7 @@ from locators.constructor_locators import ConstructorLocators
 
 @allure.feature("Основной функционал")
 class TestMainFunctionality:
-    @allure.story("Переход на страницу конструктора")
+    @allure.title("Переход на страницу конструктора")
     def test_go_to_constructor(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
@@ -17,7 +17,7 @@ class TestMainFunctionality:
         main_page.click_constructor_button()
         assert main_page.is_element_visible(MainPageLocators.BUNS_SECTION)
 
-    @allure.story("Переход на страницу Лента заказов")
+    @allure.title("Переход на страницу Лента заказов")
     def test_go_to_order_feed(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
@@ -26,7 +26,7 @@ class TestMainFunctionality:
         time.sleep(2)
         assert main_page.is_element_visible(MainPageLocators.ORDER_FEED_HEADER)
 
-    @allure.story("Появление всплывающего окна с деталями ингредиента")
+    @allure.title("Появление всплывающего окна с деталями ингредиента")
     def test_ingredient_details_modal(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
@@ -35,7 +35,7 @@ class TestMainFunctionality:
         time.sleep(2)
         assert main_page.is_element_visible(MainPageLocators.INGREDIENT_DETAILS_HEADER)
 
-    @allure.story("Закрытие всплывающего окна с деталями ингредиента")
+    @allure.title("Закрытие всплывающего окна с деталями ингредиента")
     def test_close_ingredient_details_modal(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
@@ -46,7 +46,7 @@ class TestMainFunctionality:
         time.sleep(2)
         assert main_page.is_element_visible(MainPageLocators.BUNS_TAB)
 
-    @allure.story("Увеличение каунтера ингредиента")
+    @allure.title("Увеличение каунтера ингредиента")
     def test_ingredient_counter_increase(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
@@ -59,7 +59,7 @@ class TestMainFunctionality:
         time.sleep(2)
         assert main_page.is_element_visible(MainPageLocators.COUNTER_TWO)
 
-    @allure.story("Оформление заказа залогиненным пользователем")
+    @allure.title("Оформление заказа залогиненным пользователем")
     def test_logged_in_user_can_place_order(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()

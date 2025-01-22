@@ -5,7 +5,7 @@ from config import TEST_EMAIL
 
 @allure.feature("Восстановление пароля")
 class TestPasswordRecovery:
-    @allure.story("Проверка восстановления пароля")
+    @allure.title("Проверка восстановления пароля")
     def test_password_recovery(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()

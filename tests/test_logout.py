@@ -5,7 +5,7 @@ from config import USER_EMAIL, USER_PASSWORD
 
 @allure.feature("Выход из аккаунта")
 class TestLogout:
-    @allure.story("Проверка выхода из аккаунта")
+    @allure.title("Проверка выхода из аккаунта")
     def test_logout(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()

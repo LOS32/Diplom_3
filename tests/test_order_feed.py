@@ -9,7 +9,7 @@ from pages.constructor_page import ConstructorPage
 
 @allure.feature("Лента заказов")
 class TestOrderFeed:
-    @allure.story("Открытие всплывающего окна с деталями заказа")
+    @allure.title("Открытие всплывающего окна с деталями заказа")
     def test_order_details_modal(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
@@ -21,7 +21,7 @@ class TestOrderFeed:
         time.sleep(2)
         assert main_page.find_element_with_wait(ConstructorLocators.COMPOSITION_LOCATOR).is_displayed()
 
-    @allure.story("Заказы из Истории заказов отображаются в Ленте заказов")
+    @allure.title("Заказы из Истории заказов отображаются в Ленте заказов")
     def test_order_in_feed(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
@@ -55,7 +55,7 @@ class TestOrderFeed:
         order_feed_number = order_feed_element.text.strip()
         assert order_feed_number == order_number
 
-    @allure.story("При создании нового заказа счётчик Выполнено за всё время увеличивается")
+    @allure.title("При создании нового заказа счётчик Выполнено за всё время увеличивается")
     def test_order_counter(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
@@ -83,7 +83,7 @@ class TestOrderFeed:
         order_feed_number = order_feed_element.text.strip()
         assert order_feed_number == order_number
 
-    @allure.story("После оформления заказа его номер появляется в разделе В работе")
+    @allure.title("После оформления заказа его номер появляется в разделе В работе")
     def test_order_in_progress(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()

@@ -9,7 +9,7 @@ from locators.constructor_locators import ConstructorLocators
 
 @allure.feature("Личный кабинет")
 class TestPersonalAccount:
-    @allure.story("Личный кабинет, создание заказа и проверка истории заказов")
+    @allure.title("Личный кабинет, создание заказа и проверка истории заказов")
     def test_personal_account_order_history(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()

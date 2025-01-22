@@ -23,7 +23,7 @@ class BasePage:
             WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(locator))
             self.driver.find_element(*locator).click()
         except ElementClickInterceptedException:
-            time.sleep(1)
+            WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(locator))
             self.driver.find_element(*locator).click()
 
     def add_text_to_element(self, locator, text):
