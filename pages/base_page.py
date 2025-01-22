@@ -1,8 +1,8 @@
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from locators.constructor_locators import ConstructorLocators
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import ElementClickInterceptedException
-import time
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class BasePage:
     def __init__(self, driver):
@@ -11,19 +11,19 @@ class BasePage:
     def open_page(self, url):
         self.driver.get(url)
 
-    def find_element_with_wait(self, locator, timeout=5):
+    def find_element_with_wait(self, locator, timeout=10):
         WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
         return self.driver.find_element(*locator)
 
-    def wait_for_element_visible(self, locator, timeout=5):
+    def wait_for_element_visible(self, locator, timeout=10):
         return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     def click_to_element(self, locator):
         try:
-            WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(locator))
+            WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
             self.driver.find_element(*locator).click()
         except ElementClickInterceptedException:
-            WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(locator))
+            WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
             self.driver.find_element(*locator).click()
 
     def add_text_to_element(self, locator, text):
@@ -63,3 +63,21 @@ class BasePage:
                 source_element,
                 target_element,
             )
+
+    def wait_change_value_in_element_page(self, locator, old_value, timeout=20):
+        """Ожидание, пока значение элемента изменится с указанного."""
+        WebDriverWait(self.driver, timeout).until(lambda driver: self.get_text_from_element(locator) != old_value)
+
+    def get_order_id(self):
+        if self.get_text_from_element(ConstructorLocators.ORDER_NUMBER_LOCATOR) == '9999':
+            self.wait_change_value_in_element_page(ConstructorLocators.ORDER_NUMBER_LOCATOR, '9999')
+            self.id = self.get_text_from_element(ConstructorLocators.ORDER_NUMBER_LOCATOR)
+        else:
+            self.id = self.get_text_from_element(ConstructorLocators.ORDER_NUMBER_LOCATOR)
+        return self.id
+
+
+
+
+
+

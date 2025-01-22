@@ -1,11 +1,12 @@
 import allure
-import time
 from pages.main_page import MainPage
 from locators.constructor_locators import ConstructorLocators
 from locators.main_page_locators import MainPageLocators
 from config import USER_EMAIL, USER_PASSWORD
 from pages.personal_account_page import PersonalAccountPage
 from pages.constructor_page import ConstructorPage
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 @allure.feature("Лента заказов")
 class TestOrderFeed:
@@ -13,15 +14,15 @@ class TestOrderFeed:
     def test_order_details_modal(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
-        time.sleep(2)
+        WebDriverWait(driver, 8).until(EC.element_to_be_clickable(MainPageLocators.ORDER_FEED_BUTTON))
         main_page.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
-        time.sleep(2)
+        WebDriverWait(driver, 8).until(EC.visibility_of_element_located(ConstructorLocators.ORDER_LOCATOR))
         order = main_page.find_element_with_wait(ConstructorLocators.ORDER_LOCATOR)
         order.click()
-        time.sleep(2)
+        WebDriverWait(driver, 8).until(EC.visibility_of_element_located(ConstructorLocators.COMPOSITION_LOCATOR))
         assert main_page.find_element_with_wait(ConstructorLocators.COMPOSITION_LOCATOR).is_displayed()
 
-    @allure.title("Заказы из Истории заказов отображаются в Ленте заказов")
+    @allure.story("Заказы из Истории заказов отображаются в Ленте заказов")
     def test_order_in_feed(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
@@ -34,28 +35,17 @@ class TestOrderFeed:
         bun = main_page.find_element_with_wait(MainPageLocators.BUNS_TAB)
         basket = main_page.find_element_with_wait(MainPageLocators.BASKET)
         constructor_page.drag_and_drop_element(bun, basket)
-        time.sleep(2)
         constructor_page.click_order_button()
-        time.sleep(2)
-        order_number_element = constructor_page.find_element_with_wait(ConstructorLocators.ORDER_NUMBER_LOCATOR)
-        time.sleep(2)
-        order_number = order_number_element.text.strip()
-        time.sleep(2)
+        order_number = constructor_page.get_order_id()
         constructor_page.click_to_element(ConstructorLocators.CLOSE_ORDER_MODAL_BUTTON)
-        time.sleep(2)
         main_page.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
-
-        # Находим и кликаем на заказ в Ленте заказов
         order = main_page.find_element_with_wait(ConstructorLocators.ORDER_LOCATOR)
         order.click()
-        time.sleep(2)
-
-        # Проверяем, что номер заказа совпадает
         order_feed_element = main_page.find_element_with_wait(ConstructorLocators.SPECIFIC_ORDER_LOCATOR)
         order_feed_number = order_feed_element.text.strip()
         assert order_feed_number == order_number
 
-    @allure.title("При создании нового заказа счётчик Выполнено за всё время увеличивается")
+    @allure.story("При создании нового заказа счётчик Выполнено за всё время увеличивается")
     def test_order_counter(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
@@ -68,18 +58,11 @@ class TestOrderFeed:
         bun = main_page.find_element_with_wait(MainPageLocators.BUNS_TAB)
         basket = main_page.find_element_with_wait(MainPageLocators.BASKET)
         constructor_page.drag_and_drop_element(bun, basket)
-        time.sleep(2)
         constructor_page.click_order_button()
-        time.sleep(2)
-        order_number_element = constructor_page.find_element_with_wait(ConstructorLocators.ORDER_NUMBER_LOCATOR)
-        time.sleep(2)
-        order_number = order_number_element.text.strip()
-        time.sleep(2)
+        order_number = constructor_page.get_order_id()
         constructor_page.click_to_element(ConstructorLocators.CLOSE_ORDER_MODAL_BUTTON)
-        time.sleep(2)
         main_page.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
-        order_feed_number_locator = (ConstructorLocators.SPECIFIC_ORDER_LOCATOR)
-        order_feed_element = personal_account_page.find_element_with_wait(order_feed_number_locator)
+        order_feed_element = personal_account_page.find_element_with_wait(ConstructorLocators.SPECIFIC_ORDER_LOCATOR)
         order_feed_number = order_feed_element.text.strip()
         assert order_feed_number == order_number
 
@@ -92,19 +75,14 @@ class TestOrderFeed:
         personal_account_page.enter_email(USER_EMAIL)
         personal_account_page.enter_password(USER_PASSWORD)
         personal_account_page.click_login_button()
-
         constructor_page = ConstructorPage(driver)
         bun = main_page.find_element_with_wait(MainPageLocators.BUNS_TAB)
         basket = main_page.find_element_with_wait(MainPageLocators.BASKET)
         constructor_page.drag_and_drop_element(bun, basket)
-        time.sleep(2)
+        WebDriverWait(driver, 8).until(EC.element_to_be_clickable(ConstructorLocators.ORDER_BUTTON))
         constructor_page.click_order_button()
-        time.sleep(2)
+        WebDriverWait(driver, 8).until(EC.element_to_be_clickable(ConstructorLocators.CLOSE_ORDER_MODAL_BUTTON))
         constructor_page.click_to_element(ConstructorLocators.CLOSE_ORDER_MODAL_BUTTON)
-        time.sleep(2)
-
         main_page.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
-
-        # Проверяем, что отображается раздел "В работе"
         in_progress_element = main_page.find_element_with_wait(ConstructorLocators.IN_PROGRESS)
         assert in_progress_element.is_displayed(), "Раздел 'В работе' не отображается!"

@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-class ConstructorLocators:
+class ConstructorLocators():
     BUNS_TAB = (By.XPATH, "//span[text()='Булки']/ancestor::div[contains(@class, 'tab_tab__1SPyG')]")
     BASKET = (By.XPATH, "//span[@class='constructor-element__text' and text()='Перетяните булочку сюда (верх)']")
     ORDER_BUTTON = (By.XPATH, "//button[text()='Оформить заказ']")
@@ -13,3 +13,4 @@ class ConstructorLocators:
     HISTORY_ORDER_NUMBER_LOCATOR_TEMPLATE = "//p[contains(@class, 'text_type_digits-default') and text()='#{order_number}']"
     SPECIFIC_ORDER_LOCATOR = (By.XPATH, "//p[contains(@class, 'OrderFeed_number__2MbrQ') and contains(@class, 'text_type_digits-large')]")
     IN_PROGRESS = (By.XPATH, "//li[contains(@class, 'text_type_main-small') and text()='Все текущие заказы готовы!']")
+    TICK_ANIMATION_LOCATOR = (By.XPATH, "//img[contains(@src, 'tick.887b83be.gif') and contains(@class, 'Modal_modal__image__2nh17')]")

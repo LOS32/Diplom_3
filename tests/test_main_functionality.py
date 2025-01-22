@@ -6,6 +6,8 @@ from pages.personal_account_page import PersonalAccountPage
 from pages.constructor_page import ConstructorPage
 from config import USER_EMAIL, USER_PASSWORD
 from locators.constructor_locators import ConstructorLocators
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 @allure.feature("Основной функционал")
 class TestMainFunctionality:
@@ -21,9 +23,9 @@ class TestMainFunctionality:
     def test_go_to_order_feed(self, driver):
         main_page = MainPage(driver)
         main_page.open_main_page()
-        time.sleep(2)
+        WebDriverWait(driver, 5).until(EC.visibility_of_element_located(MainPageLocators.ORDER_FEED_BUTTON))
         main_page.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
-        time.sleep(2)
+        WebDriverWait(driver, 5).until(EC.visibility_of_element_located(MainPageLocators.ORDER_FEED_HEADER))
         assert main_page.is_element_visible(MainPageLocators.ORDER_FEED_HEADER)
 
     @allure.title("Появление всплывающего окна с деталями ингредиента")
