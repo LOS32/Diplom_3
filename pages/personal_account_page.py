@@ -1,7 +1,5 @@
 from locators.personal_account_locators import PersonalAccountLocators
 from pages.base_page import BasePage
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 class PersonalAccountPage(BasePage):
     def __init__(self, driver):
