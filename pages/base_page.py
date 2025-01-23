@@ -58,6 +58,9 @@ class BasePage:
             self.id = self.get_text_from_element(ConstructorLocators.ORDER_NUMBER_LOCATOR)
         return self.id
 
+    def is_element_visible(self, locator):
+        return self.find_element_with_wait(locator).is_displayed()
+
 
 
 

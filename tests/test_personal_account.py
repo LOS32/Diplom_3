@@ -1,6 +1,5 @@
 import allure
 from pages.main_page import MainPage
-from locators.main_page_locators import MainPageLocators
 from config import USER_EMAIL, USER_PASSWORD
 from pages.personal_account_page import PersonalAccountPage
 from pages.constructor_page import ConstructorPage
@@ -18,8 +17,8 @@ class TestPersonalAccount:
         personal_account_page.enter_password(USER_PASSWORD)
         personal_account_page.click_login_button()
         constructor_page = ConstructorPage(driver)
-        bun = main_page.find_element_with_wait(MainPageLocators.BUNS_TAB)
-        basket = main_page.find_element_with_wait(MainPageLocators.BASKET)
+        bun = main_page.get_buns_tab()
+        basket = main_page.get_basket()
         constructor_page.drag_and_drop_element(bun, basket)
         constructor_page.click_order_button()
         constructor_page.close_order_modal()

@@ -27,3 +27,4 @@ class PersonalAccountPage(BasePage):
         return self.find_element_with_wait(PersonalAccountLocators.ORDER_HISTORY_ITEM).is_displayed()
 
 
+
