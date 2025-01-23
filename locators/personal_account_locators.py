@@ -6,9 +6,11 @@ class PersonalAccountLocators:
     PASSWORD_NAME_FIELD = (By.XPATH, "//label[text()='Пароль']/following-sibling::input")
     LOGIN_BUTTON_MAIN_FORM = (By.XPATH, "//button[contains(@class, 'button_button_type_primary__1O7Bx') and text()='Войти']")
     ACCOUNT_BUTTON = (By.XPATH, "//p[text()='Личный Кабинет']")
+    #ACCOUNT_BUTTON = (By.XPATH, "//a[@href='/account']//svg[@fill='#F2F2F3']")
     ORDER_HISTORY_BUTTON = (By.XPATH, "//a[@href='/account/order-history']")
     ORDER_HISTORY_ITEM = (By.XPATH, "//div[contains(@class, 'OrderHistory_textBox__3lgbs')]")
     LOGOUT_BUTTON = (By.XPATH, "//button[text()='Выход']")
+    ACCOUNT_BUTTON_AFTER_LOGIN = (By.XPATH, "//div[@class='user-menu']//p[text()='Личный Кабинет']")
 
 # Локаторы для страницы восстановления пароля
 class PasswordRecoveryLocators:

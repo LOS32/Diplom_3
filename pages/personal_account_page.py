@@ -1,5 +1,7 @@
 from locators.personal_account_locators import PersonalAccountLocators
 from pages.base_page import BasePage
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class PersonalAccountPage(BasePage):
     def __init__(self, driver):
@@ -7,9 +9,6 @@ class PersonalAccountPage(BasePage):
 
     def go_to_personal_account(self):
         self.click_to_element(PersonalAccountLocators.ACCOUNT_BUTTON)
-
-    def check_logout_button_visibility(self):
-        return self.wait_for_element_visible(PersonalAccountLocators.LOGOUT_BUTTON).is_displayed()
 
     def logout(self):
         self.click_to_element(PersonalAccountLocators.LOGOUT_BUTTON)
@@ -28,4 +27,5 @@ class PersonalAccountPage(BasePage):
 
     def is_order_present_in_history(self):
         return self.find_element_with_wait(PersonalAccountLocators.ORDER_HISTORY_ITEM).is_displayed()
+
 
