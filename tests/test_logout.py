@@ -2,7 +2,6 @@ import allure
 from pages.main_page import MainPage
 from pages.personal_account_page import PersonalAccountPage
 from config import USER_EMAIL, USER_PASSWORD
-from locators.main_page_locators import MainPageLocators
 from pages.constructor_page import ConstructorPage
 
 @allure.feature("Выход из аккаунта")
@@ -17,7 +16,7 @@ class TestLogout:
         personal_account_page.enter_password(USER_PASSWORD)
         personal_account_page.click_login_button()
         constructor_page = ConstructorPage(driver)
-        bun = main_page.get_bun_tab()
+        bun = main_page.get_buns_tab()
         basket = main_page.get_basket()
         constructor_page.drag_and_drop_element(bun, basket)
         constructor_page.click_order_button()
