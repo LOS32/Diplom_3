@@ -1,0 +1,6 @@
+TEST_EMAIL = "test_email@example.com"
+TEST_PASSWORD = "Qwerty123"
+USER_NAME = "Dmitrii"
+USER_EMAIL = "Dmitrii_Losunov_15_963@yandex.ru"
+USER_PASSWORD = "123456"
+BASE_URL = "https://stellarburgers.nomoreparties.site/"
